@@ -27,8 +27,8 @@ export default async function Home({ searchParams }: Props) {
     : undefined;
 
   return (
-    <main className="max-lg:flex max-lg:flex-col-reverse lg:grid min-h-screen lg:items-center lg:grid-cols-2">
-      <section className="z-0 w-full lg:py-16 h-full max-lg:h-[50vh]">
+    <main className="min-h-screen max-lg:flex max-lg:flex-col-reverse lg:grid lg:grid-cols-2 lg:items-center">
+      <section className="z-0 size-full max-lg:h-[50vh] lg:py-16">
         {selectedCountry ? (
           <LeafletMapWrapper
             lat={selectedCountry.latitude}
@@ -36,7 +36,7 @@ export default async function Home({ searchParams }: Props) {
             countryInfo={JSON.stringify(result)}
           />
         ) : (
-          <div className="relative w-full h-full lg:rounded-2xl overflow-hidden">
+          <div className="relative size-full overflow-hidden lg:rounded-2xl">
             <Image
               src={"/happy-world-map.webp"}
               alt="Happy world map"
@@ -47,7 +47,7 @@ export default async function Home({ searchParams }: Props) {
         )}
       </section>
 
-      <section className="flex flex-col items-center h-full justify-center max-lg:h-[50vh]">
+      <section className="flex h-full flex-col items-center justify-center max-lg:h-[50vh]">
         <Header />
 
         <SelectCountry countries={countries} />

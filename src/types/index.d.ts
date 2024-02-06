@@ -13,3 +13,11 @@ export interface CountryApiResponse {
   currency: string;
   awsRegion: string;
 }
+
+
+export interface CountryMockFile {
+  Country: string;
+  "ISO Code": string;
+  Latitude: number;
+  Longitude: number;
+}

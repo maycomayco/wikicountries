@@ -37,7 +37,7 @@ function MyComponent({ position, countryInfo }: any) {
           </p>
           <p>
             <span className="font-semibold">AWS Region: </span>
-            <span className="font-mono p-1 bg-slate-100/50 rounded">
+            <span className="rounded bg-slate-100/50 p-1 font-mono">
               {countryInfo.awsRegion}
             </span>{" "}
             🤓
@@ -58,12 +58,12 @@ export default function LeafletMapWrapper({ lat, long, countryInfo }: any) {
   }, [lat, long]);
 
   return (
-    <div className="h-full md:rounded-2xl overflow-hidden">
+    <div className="h-full overflow-hidden md:rounded-2xl">
       <MapContainer
         center={position}
         zoom={5}
         scrollWheelZoom={false}
-        className="w-full h-full"
+        className="size-full"
       >
         <MyComponent position={position} countryInfo={parsedCountryInfo} />
       </MapContainer>
