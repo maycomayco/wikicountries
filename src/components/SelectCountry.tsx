@@ -1,11 +1,10 @@
 "use client";
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { type Country } from "@/types";
 import { useRouter, useSearchParams } from "next/navigation";
 import { formUrlQuery } from "@/lib/utils";
-import qs from "query-string";
 
 type Props = {
   countries: Country[];
@@ -15,6 +14,7 @@ export default function SelectCountry({ countries }: Props) {
   const searchParams = useSearchParams();
   const router = useRouter();
 
+  // get the country code from the query params
   const paramCountry = searchParams.get("country");
   const selectedCountry = paramCountry
     ? countries.find((c) => c.isoCode === paramCountry)
@@ -24,6 +24,7 @@ export default function SelectCountry({ countries }: Props) {
     handleQueryParams(country.isoCode);
   };
 
+  // handle the query params
   const handleQueryParams = (isoCode: string) => {
     const newUrl = formUrlQuery({
       params: searchParams.toString(),
@@ -31,6 +32,7 @@ export default function SelectCountry({ countries }: Props) {
       value: isoCode,
     });
 
+    // push to the new url without scrolling
     router.push(newUrl, { scroll: false });
   };
 
@@ -40,7 +42,7 @@ export default function SelectCountry({ countries }: Props) {
       <Listbox value={selectedCountry} onChange={handleOnChange}>
         <div className="relative mt-1">
           <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
-            <span className="block truncate text-red-500">
+            <span className="block truncate text-black">
               {selectedCountry?.name || "-- Selecciona un pais --"}
             </span>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
