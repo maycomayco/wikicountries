@@ -22,12 +22,12 @@ export default async function Home({ searchParams }: Props) {
 
   return (
     <main className="flex min-h-screen flex-col items-center">
-      <div className="flex items-center z-10 flex-col w-full bg-yellow-500/50 p-4 gap-4">
+      <div className="flex items-center z-10 flex-col w-full p-4 gap-4">
         <h1 className="text-xl font-bold">Selecciona un pais</h1>
         <SelectCountry countries={countries} />
       </div>
 
-      <div className="flex flex-col items-center z-0 w-full bg-green-500/50 py-4 gap-4">
+      <div className="flex flex-col items-center z-0 w-full py-4 gap-4">
         {selectedCountry ? (
           <>
             <Greeting selectedCountry={selectedCountry} emoji={result.emoji} />
