@@ -58,7 +58,7 @@ export default function LeafletMapWrapper({ lat, long, countryInfo }: any) {
   }, [lat, long]);
 
   return (
-    <div className="w-full h-[400px]">
+    <div className="w-full h-[70dvh]">
       <MapContainer
         center={position}
         zoom={5}
