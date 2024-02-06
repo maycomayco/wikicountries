@@ -4,3 +4,12 @@ export interface Country {
   latitude: number;
   longitude: number;
 }
+
+export interface CountryApiResponse {
+  __typename: string;
+  name: string;
+  capital: string;
+  emoji: string;
+  currency: string;
+  awsRegion: string;
+}
