@@ -1,36 +1,9 @@
 import Greeting from "@/components/Greeting";
 import LeafletMapWrapper from "@/components/LeafletMapWrapper";
 import SelectCountry from "@/components/SelectCountry";
+import { getCountryByCode } from "@/data/getCountryData";
 import api from "@/lib/api";
-import { getClient } from "@/lib/apollo.client";
 import { CountryApiResponse } from "@/types";
-import { gql } from "@apollo/client";
-
-async function getData(countryCode: string) {
-  if (!countryCode) return null;
-
-  try {
-    const { data } = await getClient().query({
-      query: gql`
-        query getCountryByCode($code: ID!) {
-          country(code: $code) {
-            name
-            capital
-            emoji
-            currency
-            awsRegion
-          }
-        }
-      `,
-      variables: { code: countryCode },
-    });
-
-    return data.country;
-  } catch (error) {
-    console.error(error);
-    throw new Error("Error al obtener los datos del pais");
-  }
-}
 
 type Props = {
   searchParams: { [key: string]: string | undefined };
@@ -41,20 +14,20 @@ export default async function Home({ searchParams }: Props) {
   const countries = await api.countries.get();
 
   const result: CountryApiResponse =
-    paramCountry && (await getData(paramCountry));
+    paramCountry && (await getCountryByCode(paramCountry));
 
   const selectedCountry = paramCountry
     ? countries.find((c) => c.isoCode === paramCountry)
     : undefined;
 
   return (
-    <main className="flex min-h-screen flex-col items-center gap-8">
-      <div className="flex gap-4 items-center z-10 flex-col w-full bg-black/5 p-4">
+    <main className="flex min-h-screen flex-col items-center">
+      <div className="flex items-center z-10 flex-col w-full bg-yellow-500/50 p-4 gap-4">
         <h1 className="text-xl font-bold">Selecciona un pais</h1>
         <SelectCountry countries={countries} />
       </div>
 
-      <div className="flex flex-col items-center z-0 gap-4 w-full">
+      <div className="flex flex-col items-center z-0 w-full bg-green-500/50 py-4 gap-4">
         {selectedCountry ? (
           <>
             <Greeting selectedCountry={selectedCountry} emoji={result.emoji} />

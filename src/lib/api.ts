@@ -1,4 +1,4 @@
-import countries from "@/countries.json";
+import countries from "@/data/countries.json";
 import { Country } from "@/types";
 
 function transformCountries(countries: any[]): Country[] {
