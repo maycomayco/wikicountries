@@ -1,4 +1,5 @@
 import countries from "@/data/countries.json";
+import { getCountryByCode } from "@/data/getCountryData";
 import { Country } from "@/types";
 
 function transformCountries(countries: any[]): Country[] {
@@ -14,9 +15,10 @@ function transformCountries(countries: any[]): Country[] {
 
 const api = {
   countries: {
-    get: async () => {
+    getAll: async () => {
       return transformCountries(countries);
     },
+    getByCode: async (code: string) => getCountryByCode(code),
   },
 };
 

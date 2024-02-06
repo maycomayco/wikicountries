@@ -1,7 +1,6 @@
 import Greeting from "@/components/Greeting";
 import LeafletMapWrapper from "@/components/LeafletMapWrapper";
 import SelectCountry from "@/components/SelectCountry";
-import { getCountryByCode } from "@/data/getCountryData";
 import api from "@/lib/api";
 import { CountryApiResponse } from "@/types";
 
@@ -11,10 +10,10 @@ type Props = {
 
 export default async function Home({ searchParams }: Props) {
   const paramCountry = searchParams.country;
-  const countries = await api.countries.get();
+  const countries = await api.countries.getAll();
 
   const result: CountryApiResponse =
-    paramCountry && (await getCountryByCode(paramCountry));
+    paramCountry && (await api.countries.getByCode(paramCountry));
 
   const selectedCountry = paramCountry
     ? countries.find((c) => c.isoCode === paramCountry)
