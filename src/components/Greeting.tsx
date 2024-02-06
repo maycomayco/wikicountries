@@ -6,5 +6,9 @@ type Props = {
 };
 
 export default function Greeting({ emoji, selectedCountry }: Props) {
-  return <p>{`${GREETINGS[selectedCountry.isoCode]} ${emoji}`}</p>;
+  return (
+    <p className="text-lg text-neutral-700">{`${
+      GREETINGS[selectedCountry.isoCode]
+    } ${emoji}`}</p>
+  );
 }
