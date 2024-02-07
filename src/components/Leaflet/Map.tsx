@@ -1,20 +1,24 @@
-"use client";
-
-import { LatLngExpression } from "leaflet";
+import { Icon, LatLngExpression } from "leaflet";
+import { useEffect, useState } from "react";
 import { MapContainer, Popup, TileLayer, Marker, useMap } from "react-leaflet";
-import { Icon } from "leaflet";
 
-import "leaflet/dist/leaflet.css";
 import iconMarker from "leaflet/dist/images/marker-icon.png";
 import iconShadow from "leaflet/dist/images/marker-shadow.png";
-import { useEffect, useState } from "react";
+
+import "leaflet/dist/leaflet.css";
+import { CountryApiGraphQlResponse, LeafletProps } from "@/types";
 
 const customIcon = new Icon({
   iconUrl: iconMarker.src,
   shadowUrl: iconShadow.src,
 });
 
-function MyComponent({ position, countryInfo }: any) {
+interface MyMapComponentProps {
+  position: LatLngExpression;
+  countryInfo: CountryApiGraphQlResponse
+}
+
+function MyMapComponent({ position, countryInfo }: MyMapComponentProps) {
   const map = useMap();
   map.setView(position);
 
@@ -48,25 +52,21 @@ function MyComponent({ position, countryInfo }: any) {
   );
 }
 
-export default function LeafletMapWrapper({ lat, long, countryInfo }: any) {
+export default function Map({lat, long, countryInfo}: LeafletProps) {
   const [position, setPosition] = useState<LatLngExpression>([+lat, +long]);
-
-  const parsedCountryInfo = JSON.parse(countryInfo);
 
   useEffect(() => {
     setPosition([+lat, +long]);
   }, [lat, long]);
 
   return (
-    <div className="h-full overflow-hidden md:rounded-2xl">
-      <MapContainer
+    <MapContainer
         center={position}
         zoom={5}
         scrollWheelZoom={false}
         className="size-full"
       >
-        <MyComponent position={position} countryInfo={parsedCountryInfo} />
+        <MyMapComponent position={position} countryInfo={countryInfo} />
       </MapContainer>
-    </div>
-  );
+  )
 }

@@ -1,9 +1,9 @@
 import Greeting from "@/components/Greeting";
 import Header from "@/components/Header";
-import LeafletMapWrapper from "@/components/LeafletMapWrapper";
+import LeafletMapWrapper from "@/components/Leaflet/LeafletMapWrapper";
 import SelectCountry from "@/components/SelectCountry";
 import api from "@/lib/api";
-import { type CountryApiResponse } from "@/types";
+import { type CountryApiGraphQlResponse } from "@/types";
 import Image from "next/image";
 
 type Props = {
@@ -18,7 +18,7 @@ export default async function Home({ searchParams }: Props) {
   const countries = await api.countries.getAll();
 
   // get the country info from the API
-  const result: CountryApiResponse =
+  const result: CountryApiGraphQlResponse =
     paramCountry && (await api.countries.getByCode(paramCountry));
 
   // if there are no selected country, we'll show a message

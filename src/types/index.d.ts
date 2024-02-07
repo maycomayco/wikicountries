@@ -5,7 +5,7 @@ export interface Country {
   longitude: number;
 }
 
-export interface CountryApiResponse {
+export interface CountryApiGraphQlResponse {
   __typename: string;
   name: string;
   capital: string;
@@ -14,10 +14,8 @@ export interface CountryApiResponse {
   awsRegion: string;
 }
 
-
-export interface CountryMockFile {
-  Country: string;
-  "ISO Code": string;
-  Latitude: number;
-  Longitude: number;
+export interface LeafletProps {
+  lat: number;
+  long: number;
+  countryInfo: CountryApiGraphQlResponse;
 }

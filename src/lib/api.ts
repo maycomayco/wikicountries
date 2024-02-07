@@ -1,6 +1,13 @@
 import countries from "@/data/countries.json";
 import { getCountryByCode } from "@/data/getCountryData";
-import { type Country, type CountryMockFile } from "@/types";
+import { type Country } from "@/types";
+
+export interface CountryMockFile {
+  Country: string;
+  "ISO Code": string;
+  Latitude: number;
+  Longitude: number;
+}
 
 /**
  * Transforms an array of countries into an array of Country objects.
