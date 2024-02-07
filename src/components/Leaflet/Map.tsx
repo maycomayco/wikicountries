@@ -1,26 +1,26 @@
-import { Icon, LatLngExpression } from "leaflet";
-import { useEffect, useState } from "react";
-import { MapContainer, Popup, TileLayer, Marker, useMap } from "react-leaflet";
+import { Icon, LatLngExpression } from 'leaflet'
+import { useEffect, useState } from 'react'
+import { MapContainer, Popup, TileLayer, Marker, useMap } from 'react-leaflet'
+import iconMarker from 'leaflet/dist/images/marker-icon.png'
+import iconShadow from 'leaflet/dist/images/marker-shadow.png'
 
-import iconMarker from "leaflet/dist/images/marker-icon.png";
-import iconShadow from "leaflet/dist/images/marker-shadow.png";
-
-import "leaflet/dist/leaflet.css";
-import { CountryApiGraphQlResponse, LeafletProps } from "@/types";
+import 'leaflet/dist/leaflet.css'
+import { CountryApiGraphQlResponse, LeafletProps } from '@/types'
 
 const customIcon = new Icon({
   iconUrl: iconMarker.src,
   shadowUrl: iconShadow.src,
-});
+})
 
 interface MyMapComponentProps {
-  position: LatLngExpression;
+  position: LatLngExpression
   countryInfo: CountryApiGraphQlResponse
 }
 
 function MyMapComponent({ position, countryInfo }: MyMapComponentProps) {
-  const map = useMap();
-  map.setView(position);
+  const map = useMap()
+
+  map.setView(position)
 
   return (
     <>
@@ -28,7 +28,7 @@ function MyMapComponent({ position, countryInfo }: MyMapComponentProps) {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <Marker position={position} icon={customIcon}>
+      <Marker icon={customIcon} position={position}>
         <Popup>
           <h2 className="text-lg font-semibold">{countryInfo.name}</h2>
           <p>
@@ -43,30 +43,30 @@ function MyMapComponent({ position, countryInfo }: MyMapComponentProps) {
             <span className="font-semibold">AWS Region: </span>
             <span className="rounded bg-slate-100/50 p-1 font-mono">
               {countryInfo.awsRegion}
-            </span>{" "}
+            </span>{' '}
             🤓
           </p>
         </Popup>
       </Marker>
     </>
-  );
+  )
 }
 
-export default function Map({lat, long, countryInfo}: LeafletProps) {
-  const [position, setPosition] = useState<LatLngExpression>([+lat, +long]);
+export default function Map({ lat, long, countryInfo }: LeafletProps) {
+  const [position, setPosition] = useState<LatLngExpression>([+lat, +long])
 
   useEffect(() => {
-    setPosition([+lat, +long]);
-  }, [lat, long]);
+    setPosition([+lat, +long])
+  }, [lat, long])
 
   return (
     <MapContainer
-        center={position}
-        zoom={5}
-        scrollWheelZoom={false}
-        className="size-full"
-      >
-        <MyMapComponent position={position} countryInfo={countryInfo} />
-      </MapContainer>
+      center={position}
+      className="size-full"
+      scrollWheelZoom={false}
+      zoom={5}
+    >
+      <MyMapComponent countryInfo={countryInfo} position={position} />
+    </MapContainer>
   )
 }

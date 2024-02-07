@@ -1,8 +1,9 @@
-import { getClient } from "@/lib/apollo.client";
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client'
+
+import { getClient } from '@/lib/apollo.client'
 
 export async function getCountryByCode(countryCode: string) {
-  if (!countryCode) return null;
+  if (!countryCode) return null
 
   try {
     const { data } = await getClient().query({
@@ -18,11 +19,11 @@ export async function getCountryByCode(countryCode: string) {
         }
       `,
       variables: { code: countryCode },
-    });
+    })
 
-    return data.country;
+    return data.country
   } catch (error) {
-    console.error(error);
-    throw new Error("Error al obtener los datos del pais");
+    console.error(error)
+    throw new Error('Error al obtener los datos del pais')
   }
 }

@@ -1,12 +1,12 @@
-import countries from "@/data/countries.json";
-import { getCountryByCode } from "@/data/getCountryData";
-import { type Country } from "@/types";
+import countries from '@/data/countries.json'
+import { getCountryByCode } from '@/data/getCountryData'
+import { type Country } from '@/types'
 
 export interface CountryMockFile {
-  Country: string;
-  "ISO Code": string;
-  Latitude: number;
-  Longitude: number;
+  Country: string
+  'ISO Code': string
+  Latitude: number
+  Longitude: number
 }
 
 /**
@@ -15,20 +15,20 @@ export interface CountryMockFile {
  * @returns An array of Country objects.
  */
 function transformCountries(countries: CountryMockFile[]): Country[] {
-  const transformedCountries =  countries.map((country: any) => {
+  const transformedCountries = countries.map((country: any) => {
     return {
       name: country.Country,
-      isoCode: country["ISO Code"],
+      isoCode: country['ISO Code'],
       latitude: country.Latitude,
       longitude: country.Longitude,
-    };
-  });
+    }
+  })
 
-  const sortedCountries = transformedCountries.sort((a, b) => (
-    a.name.localeCompare(b.name)
-  ))
+  const sortedCountries = transformedCountries.sort((a, b) =>
+    a.name.localeCompare(b.name),
+  )
 
-  return sortedCountries;
+  return sortedCountries
 }
 
 /**
@@ -41,7 +41,7 @@ const api = {
      * @returns {Promise<Country[]>} A promise that resolves to an array of countries.
      */
     getAll: async () => {
-      return transformCountries(countries);
+      return transformCountries(countries)
     },
     /**
      * Get a country by its code.
@@ -50,6 +50,6 @@ const api = {
      */
     getByCode: async (code: string) => getCountryByCode(code),
   },
-};
+}
 
-export default api;
+export default api

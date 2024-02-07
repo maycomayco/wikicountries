@@ -1,14 +1,12 @@
-import { GREETINGS } from "@/lib/constants";
+import { GREETINGS } from '@/lib/constants'
 
 type Props = {
-  emoji: string;
-  selectedCountry: { isoCode: string };
-};
+  emoji: string
+  selectedCountry: { isoCode: string }
+}
 
 export default function Greeting({ emoji, selectedCountry }: Props) {
-  return (
-    <p className="text-lg text-neutral-700">{`${
-      GREETINGS[selectedCountry.isoCode]
-    } ${emoji}`}</p>
-  );
+  const greeting = GREETINGS[selectedCountry.isoCode]
+
+  return <p className="text-lg text-neutral-700">{`${greeting} ${emoji}`}</p>
 }
