@@ -6,12 +6,24 @@ Get information about a specific country without waiting. Choose a country from 
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-To run the application with pnpm, follow these steps:
+### To run the application, follow these steps:
+
+#### Environment variables
+
+So far, the only variable configured in the app is the API of the countries services. Please create your own `.env` file to set this
+
+```
+API_COUNTRIES=https://countries.trevorblades.com/
+```
+
+#### Installation
 
 ```bash
 pnpm install
 pnpm dev
 ```
+
+You can run the app with whatever you want like `npm`, `yarn`. I choosed pnpm for development purposes.
 
 ## Features
 
